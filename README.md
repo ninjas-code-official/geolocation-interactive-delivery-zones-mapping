@@ -1,70 +1,139 @@
-# Getting Started with Create React App
+# Interactive Zone Mapping with React and Google Maps API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
 
-## Available Scripts
+  <a href="https://www.youtube.com/watch?v=00voqzkFpHU">
+    <img src="./src/zones.png" alt="Demo video" style="border-radius: 6px; width: auto;">
+  </a>
 
-In the project directory, you can run:
+</div>
 
-### `npm start`
+## Introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This guide demonstrates the process of building an interactive map application using React and the Google Maps API. The focus is on enabling users to create, edit, and delete zones on the map.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+Before proceeding, make sure you have the following:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Basic knowledge of HTML, CSS, and JavaScript.
+2. Node.js and npm installed on your machine.
+3. A Google Maps API key.
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Create a new React app:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npx create-react-app map-app
+cd map-app
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. Install dependencies:
 
-### `npm run eject`
+Install the required dependencies for Google Maps:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install @react-google-maps/api
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Setting up the Interactive Map
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Obtain a Google Maps API Key:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Obtain a Google Maps API key by following the [official documentation](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
-## Learn More
+### 2. Implementing the Map Container:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Create the MapContainer component. This component will handle map interactions, zone creation, and editing.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+const MapContainer = ({ zones, setZones }) => {
+  const [map, setMap] = useState(null);
+  const [drawing, setDrawing] = useState(false);
+  const [newZone, setNewZone] = useState([]);
 
-### Code Splitting
+  const handleMapLoad = (map) => {
+    setMap(map);
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  const handleMapClick = (e) => {
+    if (drawing) {
+      setNewZone((prevZone) => [...prevZone, { lat: e.latLng.lat(), lng: e.latLng.lng() }]);
+    }
+  };
 
-### Analyzing the Bundle Size
+  const handleStartDrawing = () => {
+    setDrawing(true);
+    setNewZone([]);
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  const handleFinishDrawing = () => {
+    setDrawing(false);
 
-### Making a Progressive Web App
+    // Save the drawn zone to state
+    setZones((prevZones) => [...prevZones, { name: 'New Zone', description: 'Description', polygon: newZone }]);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    // Optionally, you can save the zones to local storage here
+    // localStorage.setItem('zones', JSON.stringify([...prevZones, { name: 'New Zone', description: 'Description', polygon: newZone }]));
 
-### Advanced Configuration
+    setNewZone([]);
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  return (
+    <div className="container">
+      <h1>Add ZONE</h1>
+      <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
+        <GoogleMap
+          id="map"
+          mapContainerStyle={{ height: '400px', width: '100%' }}
+          zoom={8}
+          center={{ lat: 0, lng: 0 }}
+          onLoad={handleMapLoad}
+          onClick={handleMapClick}
+        >
+          {drawing && <Polygon path={newZone} options={{ fillColor: '#00FF00', fillOpacity: 0.35 }} />}
+        </GoogleMap>
+      </LoadScript>
 
-### Deployment
+      {/* ... (other UI elements) */}
+    </div>
+  );
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+export default MapContainer;
+```
 
-### `npm run build` fails to minify
+### Let's break down the zone creation functions:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**handleMapLoad Function:**
+
+This function is triggered when the Google Map is loaded. It sets the map state to the loaded map instance.
+
+**handleMapClick Function:**
+
+This function is triggered when the map is clicked. If the drawing state is true, it adds a new point (latitude and longitude) to the newZone state array.
+
+**handleStartDrawing Function:**
+
+This function sets the drawing state to true and initializes an empty newZone array when the user wants to start drawing a new zone.
+
+**handleFinishDrawing Function:**
+
+This function is called when the user finishes drawing a zone. It sets the drawing state to false, adds the drawn zone (with a default name, description, and polygon) to the zones state array, and optionally saves the zones to local storage.
+
+**These functions work together to enable the creation of new zones on the map by clicking and dragging. The drawn zones are then saved to the state or local storage for later use.**
+
+## Conclusion
+
+In this tutorial, we explored the process of creating an interactive map application using React and the Google Maps API. We covered zone creation, editing, and deletion, providing a comprehensive guide for beginners to enhance their web development skills.
+
+## Next Steps
+
+- This map functionality is used in our industrial projects; explore this project to [learn more](https://github.com/ninjas-code-official/food-delivery-multivendor).
+
+- Learn more about the Google Maps API to incorporate advanced functionalities by visiting [Enatega Multivendor Admin](https://github.com/ninjas-code-official/food-delivery-multivendor/tree/main/enatega-multivendor-admin).
+
+- For support and code collaboration, please visit [ninjas-code](https://github.com/ninjas-code-official) or contact us at info@ninjascode.com.
+
+By following this step-by-step guide, even newcomers to web development can build a powerful and interactive map application. Happy coding!
