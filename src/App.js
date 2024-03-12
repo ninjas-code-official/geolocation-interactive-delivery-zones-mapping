@@ -94,7 +94,7 @@ const MapContainer = ({ zones, setZones }) => {
   return (
     <div className="container">
       <h1>Add Zone</h1>
-      <LoadScript googleMapsApiKey="AIzaSyAZFx3YCmuI-xSZrL5HKzrNiRNOhMDAB4Y">
+      <LoadScript googleMapsApiKey="Your_Google_API_Key">
         <GoogleMap
           id="map"
           mapContainerStyle={{ height: "400px", width: "100%" }}
