@@ -3,7 +3,7 @@
 <div align="center">
 
   <a href="https://www.youtube.com/watch?v=00voqzkFpHU">
-    <img src="./src/zones.png" alt="Demo video" style="border-radius: 6px; width: auto;">
+    <img src="./src/enatega-multivendor-zones.png" alt="Demo video" style="border-radius: 6px; width: auto;">
   </a>
 
 </div>
