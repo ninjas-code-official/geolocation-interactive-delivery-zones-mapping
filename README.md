@@ -1,18 +1,35 @@
-# Interactive Zone Mapping with React and Google Maps API
+<div align="center">
+  <h2>Interactive Zone Mapping with Google Maps API</h2>
+</div>
+
+<div align="center">
+
+  [![YouTube Channel](https://img.shields.io/badge/Watch_us-Youtube-red)](https://www.youtube.com/@ninjascode509)
+  [![Company Website](https://img.shields.io/badge/Visit_us-Website-blue)](https://enatega.com)
+
+</div>
+
+<div align="center">
+
+  [![Static Badge](https://img.shields.io/badge/facebook-blue?logo=facebook&logoColor=Blue&color=%23fbfbfb)](https://www.facebook.com/enategam) 
+  [![Static Badge](https://img.shields.io/badge/Instagram-blue?logo=instagram&logoColor=D815BE&color=%23fcfcfc)](https://www.instagram.com/enategam/)
+  [![Static Badge](https://img.shields.io/badge/LinkedIn-blue?logo=LinkedIn&logoColor=darkblue&color=%23fcfcfc)](http://linkedin.com/company/enatega)
+
+</div>
 
 <div align="center">
 
   <a href="https://www.youtube.com/watch?v=00voqzkFpHU">
-    <img src="./src/zones.png" alt="Demo video" style="border-radius: 6px; width: auto;">
+    <img src="./src/enatega-multivendor-zones.png" alt="Demo video" style="border-radius: 6px; width: auto;">
   </a>
 
 </div>
 
-## Introduction
+## 🔥 Introduction
 
-This guide demonstrates the process of building an interactive map application using React and the Google Maps API. The focus is on enabling users to create, edit, and delete zones on the map.
+This guide demonstrates the process of building a geolocation enabled zones mapping module using React and the Google Maps API. The objective is to enable users to create, edit, and delete delivery zones on the map.
 
-## Prerequisites
+## ⏮️ Prerequisites
 
 Before proceeding, make sure you have the following:
 
@@ -20,7 +37,7 @@ Before proceeding, make sure you have the following:
 2. Node.js and npm installed on your machine.
 3. A Google Maps API key.
 
-## Getting Started
+## 🔂 Getting Started
 
 ### 1. Create a new React app:
 
@@ -37,7 +54,7 @@ Install the required dependencies for Google Maps:
 npm install @react-google-maps/api
 ```
 
-## Setting up the Interactive Map
+## 🗺️ Setting up the Interactive Map
 
 ### 1. Obtain a Google Maps API Key:
 
@@ -104,7 +121,15 @@ const MapContainer = ({ zones, setZones }) => {
 export default MapContainer;
 ```
 
-### Let's break down the zone creation functions:
+<div align="center">
+
+  <a href="https://www.youtube.com/watch?v=00voqzkFpHU">
+    <img src="./src/zones.png" alt="Demo video" style="border-radius: 6px; width: auto;">
+  </a>
+
+</div>
+
+### ➗ Let's break down the zone creation functions:
 
 **handleMapLoad Function:**
 
@@ -124,16 +149,11 @@ This function is called when the user finishes drawing a zone. It sets the drawi
 
 **These functions work together to enable the creation of new zones on the map by clicking and dragging. The drawn zones are then saved to the state or local storage for later use.**
 
-## Conclusion
+## 📈 Learn More:
 
-In this tutorial, we explored the process of creating an interactive map application using React and the Google Maps API. We covered zone creation, editing, and deletion, providing a comprehensive guide for beginners to enhance their web development skills.
+This map functionality is used in our full fledged project Enatega; explore this project to learn more.
+Learn more about the Google Maps API to incorporate advanced functionalities by visiting our Multivendor repo: [Food-delivery-multivendor](https://github.com/ninjas-code-official/food-delivery-multivendor)
 
-## Next Steps
+## 🌐 Contact Us:
 
-- This map functionality is used in our industrial projects; explore this project to [learn more](https://github.com/ninjas-code-official/food-delivery-multivendor).
-
-- Learn more about the Google Maps API to incorporate advanced functionalities by visiting [Enatega Multivendor Admin](https://github.com/ninjas-code-official/food-delivery-multivendor/tree/main/enatega-multivendor-admin).
-
-- For support and code collaboration, please visit [ninjas-code](https://github.com/ninjas-code-official) or contact us at info@ninjascode.com.
-
-By following this step-by-step guide, even newcomers to web development can build a powerful and interactive map application. Happy coding!
+To acquire the backend license of the full solution go to [Enatega](https://enatega.com/).
