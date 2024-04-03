@@ -154,6 +154,8 @@ This function is called when the user finishes drawing a zone. It sets the drawi
 This map functionality is used in our full fledged project Enatega; explore this project to learn more.
 Learn more about the Google Maps API to incorporate advanced functionalities by visiting our Multivendor repo: [Food-delivery-multivendor](https://github.com/ninjas-code-official/food-delivery-multivendor)
 
+Check out the live demo of this project.[Live Demo](https://stunning-rolypoly-eb158a.netlify.app/)
+
 ## 🌐 Contact Us:
 
 To acquire the backend license of the full solution go to [Enatega](https://enatega.com/).
